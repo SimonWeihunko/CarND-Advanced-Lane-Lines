@@ -3,6 +3,10 @@ import cv2
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import yaml
+import os
+
+os.chdir('..')  # move up one directory
+
 # prepare object points
 nx = 9  # enter the number of inside corners in x
 ny = 6  # enter the number of inside corners in y
@@ -57,7 +61,7 @@ for num in range(1, 21):
     ax2.set_title('Undistort Image')
     ax1.imshow(img)
     ax1.set_title('Original Image')
-    plt.show()
+    # plt.show()
 
 # save camera matrix and distort coefficient
 with open('camera_mtx.yaml', 'w') as f:
