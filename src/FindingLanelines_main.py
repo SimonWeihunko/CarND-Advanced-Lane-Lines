@@ -179,7 +179,6 @@ def measure_curvature_real(ploty, left_fit_cr, right_fit_cr):
     return left_curverad, right_curverad
 
 
-
 def lane_visualization(image, undist, warped, left_fitx, right_fitx, ploty):
     # Create an image to draw the lines on
     warp_zero = np.zeros_like(warped).astype(np.uint8)
@@ -283,7 +282,7 @@ class LaneDetection:
         # find lane lines on the warped image
         out_img, left_fitx, right_fitx, ploty, left_fit, right_fit = fit_polynomial(warped)
 
-        new_detection_threshold = 0.3
+        new_detection_threshold = 0.2
         # left lane tracking
         if self.left_line.detected:
             self.left_line.diffs = left_fit - self.left_line.current_fit
@@ -354,7 +353,7 @@ class LaneDetection:
         # measure curvature
         left_curverad, right_curverad = measure_curvature_real(ploty, self.left_line.best_fit, self.right_line.best_fit)
 
-        # lane visualization
+        ###  lane visualization  ###
         # Create an image to draw the lines on
         warp_zero = np.zeros_like(warped).astype(np.uint8)
         color_warp = np.dstack((warp_zero, warp_zero, warp_zero))
@@ -387,7 +386,7 @@ class LaneDetection:
         line_type = 2
 
         words_curvature = 'curvature of the road = ' + str(road_curvature) + ' m'
-        words_veh_pos = 'vehicle position from lane center = ' + str(veh_pos) + ' m'
+        words_veh_pos = 'vehicle position from lane center = ' + str(np.abs(veh_pos)) + ' m'
         cv2.putText(result_img, words_curvature,
                     bottom_left_corner_of_text,
                     font,
@@ -413,10 +412,11 @@ os.chdir('src')
 lane_detection = LaneDetection(mtx, dist, M, Minv)
 result = lane_detection.pipeline(image)
 
-# f2, ax5 = plt.subplots()
-# ax5.imshow(result)
-# ax5.set_title("final result")
-# plt.show()
+f2, ax5 = plt.subplots()
+f2.tight_layout()
+ax5.imshow(result)
+ax5.set_title("final result")
+plt.show()
 
 
 os.chdir("..")  # move up one directory

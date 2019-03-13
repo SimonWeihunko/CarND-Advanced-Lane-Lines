@@ -35,8 +35,12 @@ for num in range(2, 21):
 
         # Draw and display the corners
         cv2.drawChessboardCorners(img, (nx, ny), corners, ret)
-        #cv2.imshow('img' + str(num), img)
-        #cv2.waitKey(100)
+        # f2, ax3 = plt.subplots(1, 1)
+        # f2.tight_layout()
+        # ax3.imshow(img)
+        # plt.show()
+        # cv2.imshow('img', img)
+        # cv2.waitKey(100)
 
 
 cv2.destroyAllWindows()
@@ -61,7 +65,7 @@ for num in range(1, 21):
     ax2.set_title('Undistort Image')
     ax1.imshow(img)
     ax1.set_title('Original Image')
-    # plt.show()
+    plt.show()
 
 # save camera matrix and distort coefficient
 with open('camera_mtx.yaml', 'w') as f:
