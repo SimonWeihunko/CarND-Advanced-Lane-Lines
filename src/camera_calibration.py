@@ -67,6 +67,7 @@ for num in range(1, 21):
     ax1.set_title('Original Image')
     plt.show()
 
+os.chdir('./src')
 # save camera matrix and distort coefficient
 with open('camera_mtx.yaml', 'w') as f:
     yaml.dump(mtx.tolist(), f)

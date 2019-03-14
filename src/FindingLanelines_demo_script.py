@@ -216,12 +216,11 @@ ax2.set_title('Color Thresholded Result')
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
 
-
 # warp the image
-bottom_left_src = (229-22, 704)
-bottom_right_src = (1095-22, 704)
-top_left_src = (595-7, 450)
-top_right_src = (690-7, 450)
+bottom_left_src = (229, 704)
+bottom_right_src = (1095, 704)
+top_left_src = (595, 450)
+top_right_src = (690, 450)
 bottom_left_dst = (290-5, 719)
 bottom_right_dst = (980-5, 719)
 top_left_dst = (290-5, 0)

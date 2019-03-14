@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5e83508-8b13-4b07-8f7a-07134199df72" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CarND-Advanced-Lane-Lines.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CarND-Advanced-Lane-Lines.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/camera_mtx.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/distort_coeff.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/project_video_result.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/project_video_result.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FindingLanelines_demo_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/FindingLanelines_demo_script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FindingLanelines_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/FindingLanelines_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Finding_lanelines_pipeline.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/camera_calibration.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/camera_calibration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/inverse_perspective_transform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/inverse_perspective_transform.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/perspective_transform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/perspective_transform.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writeup_template.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writeup.md" beforeDir="false" afterPath="$PROJECT_DIR$/writeup.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,13 +19,35 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/FindingLanelines_main.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="255">
+                    <caret line="280" column="37" selection-start-line="280" selection-start-column="37" selection-end-line="280" selection-end-column="37" />
+                    <folding>
+                      <element signature="e#33#64#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/camera_calibration.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="63" column="19" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+            <state relative-caret-position="553">
+              <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -36,20 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FindingLanelines_demo_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="230" selection-start-line="219" selection-end-line="230" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FindingLanelines_main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="418" column="10" selection-start-line="418" selection-start-column="10" selection-end-line="418" selection-end-column="10" />
-              <folding>
-                <element signature="e#33#64#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="342">
+              <caret line="228" column="82" selection-start-line="218" selection-end-line="228" selection-end-column="82" />
             </state>
           </provider>
         </entry>
@@ -58,8 +68,8 @@
         <entry file="file://$PROJECT_DIR$/writeup.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SECOND">
-              <first_editor relative-caret-position="551">
-                <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+              <first_editor relative-caret-position="879">
+                <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
               </first_editor>
               <second_editor />
             </state>
@@ -81,6 +91,10 @@
       <find>dst</find>
       <find>image</find>
       <find>left</find>
+      <find>self.allx</find>
+      <find>self.diffs</find>
+      <find>self.right_line.allyx</find>
+      <find>color_and_gradient</find>
     </findStrings>
     <replaceStrings>
       <replace>right</replace>
@@ -97,17 +111,17 @@
         <option value="$PROJECT_DIR$/s rc/camera_calibration.py" />
         <option value="$PROJECT_DIR$/src/sliding_window.py" />
         <option value="$PROJECT_DIR$/src/Finding_lanelines_pipeline.py" />
+        <option value="$PROJECT_DIR$/writeup_template.md" />
         <option value="$PROJECT_DIR$/src/camera_calibration.py" />
         <option value="$PROJECT_DIR$/src/FindingLanelines_demo_script.py" />
-        <option value="$PROJECT_DIR$/writeup_template.md" />
-        <option value="$PROJECT_DIR$/src/FindingLanelines_main.py" />
         <option value="$PROJECT_DIR$/writeup.md" />
+        <option value="$PROJECT_DIR$/src/FindingLanelines_main.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2497" />
-    <option name="y" value="115" />
+    <option name="x" value="595" />
+    <option name="y" value="100" />
     <option name="width" value="927" />
     <option name="height" value="1055" />
   </component>
@@ -270,27 +284,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14605543" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14765458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.14301191" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32937366" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32937366" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.13217768" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.13217768" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32937366" />
-      <window_info anchor="right" id="R Packages" />
-      <window_info anchor="right" id="R Graphics" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="R Packages" order="4" />
     </layout>
   </component>
   <component name="editorHistoryManager">
@@ -355,37 +369,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Finding_lanelines_pipeline.py" />
     <entry file="file://$USER_HOME$/miniconda3/envs/carnd-term1/lib/python3.5/site-packages/numpy/lib/polynomial.py" />
-    <entry file="file://$PROJECT_DIR$/src/FindingLanelines_demo_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="230" selection-start-line="219" selection-end-line="230" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/writeup_template.md" />
     <entry file="file://$PROJECT_DIR$/src/camera_calibration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="63" column="19" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+        <state relative-caret-position="553">
+          <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/writeup_template.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="2793">
-            <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/src/FindingLanelines_demo_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="228" column="82" selection-start-line="218" selection-end-line="228" selection-end-column="82" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FindingLanelines_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="418" column="10" selection-start-line="418" selection-start-column="10" selection-end-line="418" selection-end-column="10" />
+        <state relative-caret-position="255">
+          <caret line="280" column="37" selection-start-line="280" selection-start-column="37" selection-end-line="280" selection-end-column="37" />
           <folding>
             <element signature="e#33#64#0" expanded="true" />
           </folding>
@@ -395,8 +400,8 @@
     <entry file="file://$PROJECT_DIR$/writeup.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SECOND">
-          <first_editor relative-caret-position="551">
-            <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+          <first_editor relative-caret-position="879">
+            <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
           </first_editor>
           <second_editor />
         </state>

@@ -10,7 +10,7 @@ import yaml
 from moviepy.editor import VideoFileClip
 
 
-def color_and_gradient(img, s_thresh=(170, 255), sx_thresh=(30, 100)):
+def color_and_gradient(img, s_thresh=(170, 255), sx_thresh=(40, 100)):
     img = np.copy(img)
     # Convert to HLS color space and separate the V channel
     hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
@@ -253,10 +253,6 @@ class Line:
         self.line_base_pos = None
         # difference in fit coefficients between last and new fits
         self.diffs = np.array([0,0,0], dtype='float')
-        # x values for detected line pixels
-        self.allx = None
-        # y values for detected line pixels
-        self.ally = None
 
 
 class LaneDetection:
@@ -282,7 +278,7 @@ class LaneDetection:
         # find lane lines on the warped image
         out_img, left_fitx, right_fitx, ploty, left_fit, right_fit = fit_polynomial(warped)
 
-        new_detection_threshold = 0.2
+        new_detection_threshold = 0.2  # threshold to remove outliers
         # left lane tracking
         if self.left_line.detected:
             self.left_line.diffs = left_fit - self.left_line.current_fit
@@ -302,7 +298,6 @@ class LaneDetection:
             # print(self.left_line.bestx)
             # polynomial coefficients averaged over the last n iterations
             self.left_line.best_fit = np.polyfit(ploty, self.left_line.bestx, 2)
-
         else:
             self.left_line.detected = True
             # polynomial coefficients for the most recent fit
@@ -336,7 +331,6 @@ class LaneDetection:
             # print(self.right_line.bestx)
             # polynomial coefficients averaged over the last n iterations
             self.right_line.best_fit = np.polyfit(ploty, self.right_line.bestx, 2)
-
         else:
             self.right_line.detected = True
             # polynomial coefficients for the most recent fit
@@ -386,7 +380,7 @@ class LaneDetection:
         line_type = 2
 
         words_curvature = 'curvature of the road = ' + str(road_curvature) + ' m'
-        words_veh_pos = 'vehicle position from lane center = ' + str(np.abs(veh_pos)) + ' m'
+        words_veh_pos = 'vehicle position from lane center = ' + str(-veh_pos) + ' m'
         cv2.putText(result_img, words_curvature,
                     bottom_left_corner_of_text,
                     font,

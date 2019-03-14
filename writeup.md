@@ -1,7 +1,5 @@
 ## Advanced Lane Finding Project
 
-
----
 The goals / steps of this project are the following:
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
@@ -24,10 +22,6 @@ The goals / steps of this project are the following:
 [video1]: ./project_video_result.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
-
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
 
 ### Camera Calibration
 
@@ -69,10 +63,10 @@ I chose to hardcode the source and destination points in the following manner:
 
 ```python
 # warp the image
-bottom_left_src = (229-22, 704)
-bottom_right_src = (1095-22, 704)
-top_left_src = (595-7, 450)
-top_right_src = (690-7, 450)
+bottom_left_src = (229, 704)
+bottom_right_src = (1095, 704)
+top_left_src = (595, 450)
+top_right_src = (690, 450)
 bottom_left_dst = (290-5, 719)
 bottom_right_dst = (980-5, 719)
 top_left_dst = (290-5, 0)
@@ -85,10 +79,10 @@ This resulted in the following source and destination points:
 
 | Source (x, y) | Destination (x, y)| 
 |:-------------:|:-------------:| 
-| 207, 704      | 285, 719      | 
-| 588, 450      | 285, 0        |
-| 1073, 704     | 975, 719      |
-| 683, 450      | 975, 0        |
+| 229, 704      | 285, 719      | 
+| 595, 450      | 285, 0        |
+| 1095, 704     | 975, 719      |
+| 690, 450      | 975, 0        |
 
 OpenCV provides `cv2.getPerspectiveTransform(src, dst)` and `cv2.warpPerspective(img, M, img_size)` to get the perspective transform matrix and warp the image to see the result.
 I used the `./test_images/straight_lines1.jpg` to verify my perspective transform was working as expected. The lane lines in the warped image should look parallel.
@@ -146,4 +140,16 @@ Here's a [link to my video result](./project_video_result.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The entire lane detection pipeline is in the function `pipeline()` under the class `LaneDetection()`. 
+In order to have a more robust detection, the class `line()` is added to track the detected lane lines, remove outliers 
+and take an average of detected lines over the past n frames. After implementing this `line()` class, the lane detection algorithm 
+can show stable result on the `project_video.mp4`. However, it fails catastrophically on the `challenge_video.mp4` and 
+`harder_challenge_video.mp4`. In the `challenge_video.mp4`, the road is filled with irregularities and thus big gradient value
+can appear on the undesired location, which in the end produces false positive detection. A potential solution is to add more 
+color thresholding scheme like RGB threshold to detect white and yellow lines and filter out other high intensity region like shadow.
+Another improvement we can make is to further limit the search region and make a more specific assumption of where the 
+lane lines should be. Although this will limit the applicable scenarios of the algorithm, it will remove more false positive detections.
+ 
+However, there are some cases the lane lines don't even exist, like vehicle making a big turn such that the left or right lines are out
+of camera FOV. In the ultimate lane detection, we must come up a way to detect lanes not just with lines but with other 
+information as well. 
