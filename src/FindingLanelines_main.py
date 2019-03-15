@@ -160,7 +160,7 @@ def fit_polynomial(binary_warped):
     return out_img, left_fitx, right_fitx, ploty, left_fit, right_fit
 
 
-def measure_curvature_real(ploty, left_fit_cr, right_fit_cr):
+def measure_curvature_real(ploty, left_fitx, right_fitx):
     '''
     Calculates the curvature of polynomial functions in meters.
     '''
@@ -168,13 +168,19 @@ def measure_curvature_real(ploty, left_fit_cr, right_fit_cr):
     ym_per_pix = 40 / 720  # meters per pixel in y dimension
     xm_per_pix = 3.7 / 700  # meters per pixel in x dimension
 
+    ploty_m = ploty*ym_per_pix
+    left_fitx_m = left_fitx*xm_per_pix
+    right_fitx_m = right_fitx*xm_per_pix
+
+    left_fit_m = np.polyfit(ploty_m, left_fitx_m, 2)
+    right_fit_m = np.polyfit(ploty_m, right_fitx_m, 2)
     # Define y-value where we want radius of curvature
     # We'll choose the maximum y-value, corresponding to the bottom of the image
-    y_eval = np.max(ploty)
+    y_eval = np.max(ploty_m)
 
     # Implement the calculation of R_curve (radius of curvature)
-    left_curverad = (1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5 / abs(2*left_fit_cr[0])
-    right_curverad = (1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5 / abs(2*right_fit_cr[0])
+    left_curverad = (1 + (2*left_fit_m[0]*y_eval + left_fit_m[1])**2)**1.5 / abs(2*left_fit_m[0])
+    right_curverad = (1 + (2*right_fit_m[0]*y_eval + right_fit_m[1])**2)**1.5 / abs(2*right_fit_m[0])
 
     return left_curverad, right_curverad
 
@@ -345,7 +351,7 @@ class LaneDetection:
             self.right_line.recent_xfitted = [right_fitx]
 
         # measure curvature
-        left_curverad, right_curverad = measure_curvature_real(ploty, self.left_line.best_fit, self.right_line.best_fit)
+        left_curverad, right_curverad = measure_curvature_real(ploty, self.left_line.bestx, self.right_line.bestx)
 
         ###  lane visualization  ###
         # Create an image to draw the lines on
