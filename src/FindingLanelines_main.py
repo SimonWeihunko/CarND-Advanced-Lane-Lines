@@ -185,27 +185,6 @@ def measure_curvature_real(ploty, left_fitx, right_fitx):
     return left_curverad, right_curverad
 
 
-def lane_visualization(image, undist, warped, left_fitx, right_fitx, ploty):
-    # Create an image to draw the lines on
-    warp_zero = np.zeros_like(warped).astype(np.uint8)
-    color_warp = np.dstack((warp_zero, warp_zero, warp_zero))
-
-    # Recast the x and y points into usable format for cv2.fillPoly()
-    pts_left = np.array([np.transpose(np.vstack([left_fitx, ploty]))])
-    pts_right = np.array([np.flipud(np.transpose(np.vstack([right_fitx, ploty])))])
-    pts = np.hstack((pts_left, pts_right))
-
-    # Draw the lane onto the warped blank image
-    cv2.fillPoly(color_warp, np.int_([pts]), (0, 255, 0))
-
-    # Warp the blank back to original image space using inverse perspective matrix (Minv)
-    newwarp = cv2.warpPerspective(color_warp, Minv, (image.shape[1], image.shape[0]))
-    # Combine the result with the original image
-    result = cv2.addWeighted(undist, 1, newwarp, 0.3, 0)
-
-    return result
-
-
 def output_words_on_image(img, words):
     font = cv2.FONT_HERSHEY_SIMPLEX
     bottom_left_corner_of_text = (10, 100)
@@ -285,6 +264,7 @@ class LaneDetection:
         out_img, left_fitx, right_fitx, ploty, left_fit, right_fit = fit_polynomial(warped)
 
         new_detection_threshold = 0.2  # threshold to remove outliers
+
         # left lane tracking
         if self.left_line.detected:
             self.left_line.diffs = left_fit - self.left_line.current_fit
@@ -298,10 +278,9 @@ class LaneDetection:
                     self.left_line.recent_xfitted.pop(0)
                     self.left_line.recent_xfitted.append(left_fitx)
             else:
-                print(left_fit)
+                print("left line outlier", left_fit)
             # average x values of the fitted line over the last n iterations
             self.left_line.bestx = sum(self.left_line.recent_xfitted)/len(self.left_line.recent_xfitted)
-            # print(self.left_line.bestx)
             # polynomial coefficients averaged over the last n iterations
             self.left_line.best_fit = np.polyfit(ploty, self.left_line.bestx, 2)
         else:
@@ -319,7 +298,6 @@ class LaneDetection:
 
         # right lane tracking
         if self.right_line.detected:
-
             self.right_line.diffs = right_fit - self.right_line.current_fit
 
             if np.sum(np.abs(self.right_line.diffs / self.right_line.current_fit) < new_detection_threshold):
@@ -331,10 +309,9 @@ class LaneDetection:
                     self.right_line.recent_xfitted.pop(0)
                     self.right_line.recent_xfitted.append(right_fitx)
             else:
-                print(right_fit)
+                print("right line outlier", right_fit)
             # average x values of the fitted line over the last n iterations
             self.right_line.bestx = sum(self.right_line.recent_xfitted) / len(self.right_line.recent_xfitted)
-            # print(self.right_line.bestx)
             # polynomial coefficients averaged over the last n iterations
             self.right_line.best_fit = np.polyfit(ploty, self.right_line.bestx, 2)
         else:
@@ -353,7 +330,7 @@ class LaneDetection:
         # measure curvature
         left_curverad, right_curverad = measure_curvature_real(ploty, self.left_line.bestx, self.right_line.bestx)
 
-        ###  lane visualization  ###
+        # lane visualization
         # Create an image to draw the lines on
         warp_zero = np.zeros_like(warped).astype(np.uint8)
         color_warp = np.dstack((warp_zero, warp_zero, warp_zero))
@@ -404,7 +381,7 @@ class LaneDetection:
         return result_img
 
 
-os.listdir()  # move up one directory
+os.listdir()
 os.chdir("..")  # move up one directory
 image = mpimg.imread('test_images/test2.jpg')
 os.chdir('src')
